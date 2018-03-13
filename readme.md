@@ -4,7 +4,7 @@
 
 ```shell
 # git clone
-$ git clone https://github.com/Lupin3000/MyPrivateAtlasCloud
+$ git clone https://github.com/Lupin3000/MyPrivateAtlasCloud.git
 
 # change directory
 $ cd MyPrivateAtlasCloud
