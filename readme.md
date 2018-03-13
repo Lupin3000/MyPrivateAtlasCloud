@@ -1,17 +1,20 @@
 # MyPrivate Vagrant Cloud
 
-## Installation and running
+## Installation and start up
 
 ```shell
 # git clone
-$ git clone 
+$ git clone https://github.com/Lupin3000/MyPrivateAtlasCloud
 
 # change directory
-$ cd
+$ cd MyPrivateAtlasCloud
 
 # start via docker-compose
 $ docker-compose up -d
 
 # view logs (optional)
 $ docker-compose logs
+
+# open browser
+$ open -a Safari http://localhost:8080/
 ```
