@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
       $_SESSION['valid'] = true;
       $_SESSION['timeout'] = time();
       $_SESSION['user'] = $_POST['user'];
-      header("Location: ./boxes/");
+      header('Location: ./atlas.php');
     } else {
       $error = 'Wrong credentials';
     }
