@@ -44,7 +44,7 @@ function box_json()
     $box_checksum = $json_data['versions'][0]['providers'][0]['checksum'];
     $box_checksum_type = $json_data['versions'][0]['providers'][0]['checksum_type'];
 
-    array_push($response, array('file' => $json_url,
+    array_push($response, array('json_url' => $json_url,
                                 'name' => $box_name,
                                 'description_l' => $box_desc_long,
                                 'description_s' => $box_desc_short,
