@@ -95,40 +95,18 @@ function check_file()
   }
 }
 
-function check_request_method($request)
+if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
 {
-  global $response;
-
-  if (strcmp($_SERVER['REQUEST_METHOD'], $request) == 0)
-  {
-    return true;
-  } else {
-    $response['status'] = false;
-    $response['message'] = 'Bad request!';
-    return false;
-  }
-}
-
-function check_session()
-{
-  global $response;
-
-  if (!isset($_SESSION['valid']) || !isset($_SESSION['user']))
-  {
-    $response['status'] = false;
-    $response['message'] = 'You are not allowed to upload a box.';
-    return false;
-  } else {
-    return true;
-  }
-}
-
-if (check_session())
-{
-  if (check_request_method('POST'))
+  if (strcmp($_SERVER['REQUEST_METHOD'], 'POST') == 0)
   {
     check_file();
+  } else {
+    $response['status'] = false;
+    $response['message'] = 'Bad request';
   }
+} else {
+  $response['status'] = false;
+  $response['message'] = 'Access to content prohibited';
 }
 
 header('Access-Control-Allow-Origin: *');

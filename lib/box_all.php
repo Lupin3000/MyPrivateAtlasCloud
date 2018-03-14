@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-$response = array();
 $ini_array = parse_ini_file('./config/config.ini', true);
 $domain = $ini_array['server']['URL'];
 $meta_dir = $ini_array['repository']['json_dir'];
 $glob_pattern = dirname(__FILE__) . $meta_dir . '*.json';
+$response = array();
 
 function truncate($string, $length=100, $append="...")
 {
   $string = trim($string);
-  if(strlen($string) > $length)
+  if (strlen($string) > $length)
   {
     $string = wordwrap($string, $length);
     $string = explode("\n", $string, 2);
@@ -19,15 +19,12 @@ function truncate($string, $length=100, $append="...")
   return $string;
 }
 
-function box_json()
+function json_box_list($domain, $meta_dir, $glob_pattern)
 {
   global $response;
-  global $domain;
-  global $meta_dir;
-  global $glob_pattern;
 
   $response['status'] = true;
-  $response['message'] = 'Your current box list';
+  $response['message'] = 'The list of current boxes';
 
   foreach (array_filter(glob($glob_pattern), 'is_file') as $entry)
   {
@@ -51,12 +48,18 @@ function box_json()
   }
 }
 
-if (!isset($_SESSION['valid']) || !isset($_SESSION['user']))
+if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
 {
-  $response['status'] = false;
-  $response['message'] = 'You are not allowed to list boxes';
+  if (strcmp($_SERVER['REQUEST_METHOD'], 'GET') == 0)
+  {
+    json_box_list($domain, $meta_dir, $glob_pattern);
+  } else {
+    $response['status'] = false;
+    $response['message'] = 'Bad request';
+  }
 } else {
-  box_json();
+  $response['status'] = false;
+  $response['message'] = 'Access to content prohibited';
 }
 
 header('Access-Control-Allow-Origin: *');

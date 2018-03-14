@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$response = array();
 $ini_array = parse_ini_file('./config/config.ini', true);
 $box_dir = dirname(__FILE__) . $ini_array['repository']['box_dir'];
 $meta_dir = dirname(__FILE__) . $ini_array['repository']['json_dir'];
+$response = array();
 
 function transform_input($value='')
 {
@@ -13,13 +13,12 @@ function transform_input($value='')
   return $value;
 }
 
-function delete_json()
+function json_box_delete($box_dir, $meta_dir)
 {
   global $response;
-  global $box_dir;
-  global $meta_dir;
 
-  $json_url = parse_url(transform_input($_GET['url']), PHP_URL_PATH);
+  $url = transform_input($_GET['url']);
+  $json_url = parse_url($url, PHP_URL_PATH);
   $json_file = $meta_dir . basename($json_url);
   $box_file = $box_dir . str_replace('.json', '.box', basename($json_url));
 
@@ -36,12 +35,18 @@ function delete_json()
   $response['message'] = 'Box successful deleted';
 }
 
-if (!isset($_SESSION['valid']) || !isset($_SESSION['user']))
+if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
 {
-  $response['status'] = false;
-  $response['message'] = 'You are not allowed to delete boxes';
+  if ((strcmp($_SERVER['REQUEST_METHOD'], 'GET') == 0) && (isset($_GET['url'])))
+  {
+    json_box_delete($box_dir, $meta_dir);
+  } else {
+    $response['status'] = false;
+    $response['message'] = 'Bad request';
+  }
 } else {
-  delete_json();
+  $response['status'] = false;
+  $response['message'] = 'Access to content prohibited';
 }
 
 header('Access-Control-Allow-Origin: *');
