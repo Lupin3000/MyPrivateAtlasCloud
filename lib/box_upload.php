@@ -6,6 +6,7 @@ $domain = $ini_array['server']['URL'];
 $box_dir = dirname(__FILE__) . $ini_array['repository']['box_dir'];
 $meta_dir = dirname(__FILE__) . $ini_array['repository']['json_dir'];
 $box_url = $domain . str_replace(dirname(__FILE__), '', $box_dir);
+$time = time();
 $response = array();
 
 function transform_input($value='')
@@ -20,17 +21,18 @@ function create_update_json($newname)
   global $response;
   global $meta_dir;
   global $box_url;
+  global $time;
 
   $checksum = sha1_file($newname);
   $box_name = basename($newname);
-  $json_name = $meta_dir . $box_name . '.json';
+  $json_name = str_replace('.box', '', $meta_dir . $box_name) . '.json';
 
   $content = array(
     'name' => transform_input($_POST['boxname']),
     'description' => transform_input($_POST['boxdescription']),
     'versions' => array(
       array(
-        'version' => time(),
+        'version' => $time,
         'providers' => array(
           array(
             'name' => transform_input($_POST['boxprovider']),
