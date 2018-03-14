@@ -5,6 +5,7 @@ $response = array();
 $ini_array = parse_ini_file("../config.ini", true);
 $domain = $ini_array['server']['URL'];
 $meta_dir = $ini_array['repository']['json_dir'];
+$glob_pattern = dirname(__FILE__) . $meta_dir . '*.json';
 
 function truncate($string, $length=100, $append="...")
 {
@@ -23,39 +24,35 @@ function box_json()
   global $response;
   global $domain;
   global $meta_dir;
+  global $glob_pattern;
 
-  if ($handle = opendir('.' . $meta_dir))
+  $response['status'] = true;
+  $response['message'] = 'Your current box list.';
+
+  foreach (array_filter(glob($glob_pattern), 'is_file') as $entry)
   {
-    $response['status'] = true;
-    $response['message'] = 'Your boxes for usage.';
-    while (false !== ($entry = readdir($handle)))
-    {
-      if ($entry != "." && $entry != "..")
-      {
-        $json = file_get_contents('.' . $meta_dir . $entry);
-        $data = json_decode($json, true);
-        $file = $domain . '/boxes' . $meta_dir . $entry;
-        $short_desc = truncate($data['description'], 25, '...');
-        $provider = $data['versions'][0]['providers'][0]['name'];
-        $url  = $data['versions'][0]['providers'][0]['url'];
-        $version = $data['versions'][0]['version'];
-        $checksum = $data['versions'][0]['providers'][0]['checksum'];
-        $checksum_type = $data['versions'][0]['providers'][0]['checksum_type'];
-        array_push($response, array('file'=>$file,
-                                    'name'=>$data['name'],
-                                    'description_l'=>$data['description'],
-                                    'description_s'=>$short_desc,
-                                    'provider'=>$provider,
-                                    'url'=>$url,
-                                    'version'=>$version,
-                                    'checksum'=>$checksum,
-                                    'checksum_type'=>$checksum_type));
-      }
-    }
-    closedir($handle);
-  } else {
-    $response['status'] = false;
-    $response['message'] = 'Internal error, could not open meta directory';
+    $file_data = file_get_contents($entry);
+    $json_data = json_decode($file_data, true);
+
+    $meta_url = $domain . '/boxes' . $meta_dir . basename($entry);
+    $box_name = $json_data['name'];
+    $box_desc_long = $json_data['description'];
+    $box_desc_short = truncate($json_data['description'], 25, '...');
+    $box_provider = $json_data['versions'][0]['providers'][0]['name'];
+    $box_url  = $json_data['versions'][0]['providers'][0]['url'];
+    $box_version = $json_data['versions'][0]['version'];
+    $box_checksum = $json_data['versions'][0]['providers'][0]['checksum'];
+    $box_checksum_type = $json_data['versions'][0]['providers'][0]['checksum_type'];
+
+    array_push($response, array('file' => $meta_url,
+                                'name' => $box_name,
+                                'description_l' => $box_desc_long,
+                                'description_s' => $box_desc_short,
+                                'provider' => $box_provider,
+                                'url' => $box_url,
+                                'version' => $box_version,
+                                'checksum' => $box_checksum,
+                                'checksum_type' => $box_checksum_type));
   }
 }
 
