@@ -36,8 +36,7 @@ function box_json()
 
     $json_url = $domain . $meta_dir . basename($entry);
     $box_name = $json_data['name'];
-    $box_desc_long = $json_data['description'];
-    $box_desc_short = truncate($json_data['description'], 25, '...');
+    $box_description = truncate($json_data['description'], 25, '...');
     $box_provider = $json_data['versions'][0]['providers'][0]['name'];
     $box_url  = $json_data['versions'][0]['providers'][0]['url'];
     $box_version = $json_data['versions'][0]['version'];
@@ -45,14 +44,10 @@ function box_json()
     $box_checksum_type = $json_data['versions'][0]['providers'][0]['checksum_type'];
 
     array_push($response, array('json_url' => $json_url,
+                                'box_url' => $box_url,
                                 'name' => $box_name,
-                                'description_l' => $box_desc_long,
-                                'description_s' => $box_desc_short,
-                                'provider' => $box_provider,
-                                'url' => $box_url,
-                                'version' => $box_version,
-                                'checksum' => $box_checksum,
-                                'checksum_type' => $box_checksum_type));
+                                'description' => $box_description,
+                                'provider' => $box_provider));
   }
 }
 
