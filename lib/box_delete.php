@@ -21,7 +21,7 @@ function delete_json()
 
   $json_url = parse_url(transform_input($_GET['url']), PHP_URL_PATH);
   $json_file = $meta_dir . basename($json_url);
-  $box_file = str_replace('.json', '', $box_dir . basename($json_url));
+  $box_file = $box_dir . str_replace('.json', '.box', basename($json_url));
 
   if(is_file($json_file)) {
     unlink($json_file);
@@ -33,13 +33,13 @@ function delete_json()
   $response['json_path'] = $json_file;
   $response['box_path'] = $box_file;
   $response['status'] = true;
-  $response['message'] = 'Your box is deleted.';
+  $response['message'] = 'Box successful deleted';
 }
 
 if (!isset($_SESSION['valid']) || !isset($_SESSION['user']))
 {
   $response['status'] = false;
-  $response['message'] = 'You are not allowed to delete boxes.';
+  $response['message'] = 'You are not allowed to delete boxes';
 } else {
   delete_json();
 }

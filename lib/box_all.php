@@ -27,7 +27,7 @@ function box_json()
   global $glob_pattern;
 
   $response['status'] = true;
-  $response['message'] = 'Your current box list.';
+  $response['message'] = 'Your current box list';
 
   foreach (array_filter(glob($glob_pattern), 'is_file') as $entry)
   {
@@ -54,7 +54,7 @@ function box_json()
 if (!isset($_SESSION['valid']) || !isset($_SESSION['user']))
 {
   $response['status'] = false;
-  $response['message'] = 'You are not allowed to list boxes.';
+  $response['message'] = 'You are not allowed to list boxes';
 } else {
   box_json();
 }

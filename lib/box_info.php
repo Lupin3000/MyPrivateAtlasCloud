@@ -11,7 +11,7 @@ function show_box_info()
   global $domain;
 
   $response['status'] = true;
-  $response['message'] = 'Box information.';
+  $response['message'] = 'Box information';
 
   $url = htmlspecialchars(trim($_GET['url']));
   $path = dirname(__FILE__) . str_replace($domain, '', $url);
@@ -39,14 +39,14 @@ function show_box_info()
 if (!isset($_SESSION['valid']) || !isset($_SESSION['user']))
 {
   $response['status'] = false;
-  $response['message'] = 'You are not allowed to show box info.';
+  $response['message'] = 'You are not allowed to show box info';
 } else {
   if (!empty($_GET['url']))
   {
     show_box_info();
   } else {
     $response['status'] = false;
-    $response['message'] = 'Wrong request.';
+    $response['message'] = 'Wrong request';
   }
 }
 

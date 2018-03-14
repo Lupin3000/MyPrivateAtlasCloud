@@ -49,7 +49,7 @@ function create_update_json($newname)
   file_put_contents($json_name, $json_data);
 
   $response['status'] = true;
-  $response['message'] = 'Your box is successful uploaded.';
+  $response['message'] = 'Your box is successful uploaded';
   $response['name'] = $_POST['boxname'];
   $response['provider'] = $_POST['boxprovider'];
   $response['description'] = $_POST['boxdescription'];
@@ -68,7 +68,7 @@ function move_file($filename)
     create_update_json($newname);
   } else {
     $response['status'] = false;
-    $response['message'] = 'Could not move upload to target dir.';
+    $response['message'] = 'Could not move upload to target dir';
   }
 }
 
