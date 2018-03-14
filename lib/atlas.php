@@ -8,7 +8,7 @@ include './session.php';
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>MyPrivate Atlas Cloud</title>
+  <title>MyPrivate Vagrant Cloud</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
   <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
