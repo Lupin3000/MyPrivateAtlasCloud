@@ -3,8 +3,9 @@ session_start();
 
 $ini_array = parse_ini_file("./config.ini", true);
 $domain = $ini_array['server']['URL'];
-$box_dir = $ini_array['repository']['box_dir'];
-$meta_dir = $ini_array['repository']['json_dir'];
+$box_dir = dirname(__FILE__) . $ini_array['repository']['box_dir'];
+$meta_dir = dirname(__FILE__) . $ini_array['repository']['json_dir'];
+$box_url = $domain . str_replace(dirname(__FILE__), '', $box_dir);
 $response = array();
 
 function transform_input($value='')
@@ -16,15 +17,13 @@ function transform_input($value='')
 
 function create_update_json($newname)
 {
-  global $ini_array;
-  global $domain;
   global $response;
   global $meta_dir;
-  global $box_dir;
+  global $box_url;
 
   $checksum = sha1_file($newname);
-  $boxname = basename($newname);
-  $jsonname = dirname(__FILE__) . $meta_dir . $boxname . '.json';
+  $box_name = basename($newname);
+  $json_name = $meta_dir . $box_name . '.json';
 
   $content = array(
     'name' => transform_input($_POST['boxname']),
@@ -34,8 +33,8 @@ function create_update_json($newname)
         'version' => time(),
         'providers' => array(
           array(
-            'name' => $_POST['boxprovider'],
-            'url' => $domain . '/boxes' . $box_dir . $boxname,
+            'name' => transform_input($_POST['boxprovider']),
+            'url' => $box_url . $box_name,
             'checksum_type' => 'sha1',
             'checksum' => $checksum
           )
@@ -45,7 +44,7 @@ function create_update_json($newname)
   );
 
   $json_data = json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-  file_put_contents($jsonname, $json_data);
+  file_put_contents($json_name, $json_data);
 
   $response['status'] = true;
   $response['message'] = 'Your box is successful uploaded.';
@@ -60,7 +59,7 @@ function move_file($filename)
   global $response;
   global $box_dir;
 
-  $newname = dirname(__FILE__) . $box_dir . $filename;
+  $newname = $box_dir . $filename;
 
   if (move_uploaded_file($_FILES['boxfile']['tmp_name'], $newname))
   {
