@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$ini_array = parse_ini_file("config.ini", true);
+$ini_array = parse_ini_file("./config.ini", true);
 $security = $ini_array['login']['security'];
 $user = $ini_array['login']['user'];
 $password = $ini_array['login']['password'];
@@ -25,7 +25,7 @@ if ($security == "off"){
   $_SESSION['valid'] = true;
   $_SESSION['timeout'] = time();
   $_SESSION['user'] = 'anonymous';
-  header("Location: ./boxes/");
+  header('Location: ./atlas.php');
 }
 ?>
 <!doctype html>

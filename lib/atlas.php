@@ -1,5 +1,5 @@
 <?php
-include 'session.php';
+include './session.php';
 ?>
 <!doctype html>
 <html>
@@ -14,7 +14,7 @@ include 'session.php';
   <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
   <script language="JavaScript" type="text/javascript" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
   <div class="wrapper">
@@ -33,13 +33,13 @@ include 'session.php';
             <a class="navigation-link" id="help_btn" href="#" title="Show help page">Help</a>
           </li>
           <?php
-          $ini_array = parse_ini_file("../config.ini", true);
+          $ini_array = parse_ini_file("./config.ini", true);
           $security = $ini_array['login']['security'];
 
           if ($security == "on")
           {
             echo '<li class="navigation-item">';
-            echo '<a class="navigation-link" id="logout_btn" href="../logout.php" title="Logout from application">Logout</a>';
+            echo '<a class="navigation-link" id="logout_btn" href="./logout.php" title="Logout from application">Logout</a>';
             echo '</li>';
           }
           ?>
@@ -97,7 +97,7 @@ include 'session.php';
       <span class="close float-right" id="close_help">&times;</span>
       <h2>Help</h2>
       <p>How can I use the Vagrant box locally?</p>
-      <img src="../img/help.jpg" alt="help image with example box">
+      <img src="./img/help.jpg" alt="help image with example box">
       <h4>Use cloud repository</h4>
       <p>
         <code>
@@ -122,22 +122,8 @@ include 'session.php';
           $ vagrant init demo/centos7
         </code>
       </p>
-      <h4>Information</h4>
-      <p>
-        <ul>
-          <li>
-            <a href="./bin/" target="_blank" title="Vagrant box binary directory">Boxes</a>
-          </li>
-          <li>
-            <a href="./meta/" target="_blank" title="Vagrant box metadata directory">Metadata</a>
-          </li>
-          <li>
-            <a href="https://www.vagrantup.com/docs/index.html" target="_blank" title="Vagrant documentation">Vagrant documentation</a>
-          </li>
-        </ul>
-      </p>
     </div>
   </div>
-  <script language="JavaScript" type="text/javascript" src="../js/box.js"></script>
+  <script language="JavaScript" type="text/javascript" src="./js/box.js"></script>
 </body>
 </html>
