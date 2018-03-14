@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$ini_array = parse_ini_file("./config.ini", true);
-$box_dir = $ini_array['repository']['box_dir'];
-$meta_dir = $ini_array['repository']['json_dir'];
 $response = array();
+$ini_array = parse_ini_file("./config.ini", true);
+$box_dir = dirname(__FILE__) . $ini_array['repository']['box_dir'];
+$meta_dir = dirname(__FILE__) . $ini_array['repository']['json_dir'];
 
 function transform_input($value='')
 {
@@ -20,18 +20,18 @@ function delete_json()
   global $meta_dir;
 
   $json_url = parse_url(transform_input($_GET['url']), PHP_URL_PATH);
-  $json_file = $meta_dir . str_replace('/boxes/meta/', '', $json_url);
-  $box_file = $box_dir . str_replace('/meta/', '', str_replace('.json', '', $json_file));
+  $json_file = $meta_dir . basename($json_url);
+  $box_file = str_replace('.json', '', $box_dir . basename($json_url));
 
-  if(is_file('.' . $json_file)) {
-    unlink('.' . $json_file);
+  if(is_file($json_file)) {
+    unlink($json_file);
   }
-  if(is_file('.' . $box_file)) {
-    unlink('.' . $box_file);
+  if(is_file($box_file)) {
+    unlink($box_file);
   }
 
-  $response['json'] = $json_file;
-  $response['box'] = $box_file;
+  $response['json_path'] = $json_file;
+  $response['box_path'] = $box_file;
   $response['status'] = true;
   $response['message'] = 'Your box is deleted.';
 }
