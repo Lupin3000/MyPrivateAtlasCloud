@@ -32,7 +32,7 @@ function create_update_json($newname)
     'description' => transform_input($_POST['boxdescription']),
     'versions' => array(
       array(
-        'version' => $time,
+        'version' => (string) $time,
         'providers' => array(
           array(
             'name' => transform_input($_POST['boxprovider']),
