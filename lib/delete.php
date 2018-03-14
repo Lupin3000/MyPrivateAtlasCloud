@@ -2,7 +2,7 @@
 session_start();
 
 $response = array();
-$ini_array = parse_ini_file("./config.ini", true);
+$ini_array = parse_ini_file('./config/config.ini', true);
 $box_dir = dirname(__FILE__) . $ini_array['repository']['box_dir'];
 $meta_dir = dirname(__FILE__) . $ini_array['repository']['json_dir'];
 

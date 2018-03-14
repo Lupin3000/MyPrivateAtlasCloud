@@ -2,7 +2,7 @@
 session_start();
 
 $response = array();
-$ini_array = parse_ini_file('./config.ini', true);
+$ini_array = parse_ini_file('./config/config.ini', true);
 $domain = $ini_array['server']['URL'];
 $meta_dir = $ini_array['repository']['json_dir'];
 $glob_pattern = dirname(__FILE__) . $meta_dir . '*.json';

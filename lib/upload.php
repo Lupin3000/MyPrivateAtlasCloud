@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$ini_array = parse_ini_file("./config.ini", true);
+$ini_array = parse_ini_file('./config/config.ini', true);
 $domain = $ini_array['server']['URL'];
 $box_dir = dirname(__FILE__) . $ini_array['repository']['box_dir'];
 $meta_dir = dirname(__FILE__) . $ini_array['repository']['json_dir'];
