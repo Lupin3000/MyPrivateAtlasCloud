@@ -33,7 +33,7 @@ include './session.php';
             <a class="navigation-link" id="help_btn" href="#" title="Show help page">Help</a>
           </li>
           <?php
-          $ini_array = parse_ini_file('./config/config.ini', true);
+          $ini_array = parse_ini_file('./config/application.ini', true);
           $security = $ini_array['login']['security'];
 
           if ($security == "on")

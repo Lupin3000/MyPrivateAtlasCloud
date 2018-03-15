@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$ini_array = parse_ini_file('./config/config.ini', true);
+$ini_array = parse_ini_file('./config/application.ini', true);
 $security = $ini_array['login']['security'];
 $user = $ini_array['login']['user'];
 $password = $ini_array['login']['password'];
