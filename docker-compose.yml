@@ -11,6 +11,9 @@ services:
       - ./lib:/var/www/html
     links:
       - fpm
+#    depends_on:
+#      - mysql
+#      - fpm
   fpm:
     image: php:7-fpm
     container_name: php
@@ -18,6 +21,8 @@ services:
       - ./conf/custom.ini:/usr/local/etc/php/conf.d/custom.ini
       - ./lib:/var/www/html
 #    links:
+#      - mysql
+#    depends_on:
 #      - mysql
 #  mysql:
 #    image: mysql
