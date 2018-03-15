@@ -33,7 +33,7 @@ include './session.php';
             <a class="navigation-link" id="help_btn" href="#" title="Show help page">Help</a>
           </li>
           <?php
-          $ini_array = parse_ini_file('./config/config.ini', true);
+          $ini_array = parse_ini_file('./config/application.ini', true);
           $security = $ini_array['login']['security'];
 
           if ($security == "on")
@@ -47,6 +47,7 @@ include './session.php';
       </section>
     </nav>
     <div class="container">
+      <h1>Discover the world of Vagrant boxes</h1>
       <table id="boxTable">
         <thead>
           <tr>
@@ -96,13 +97,13 @@ include './session.php';
     <div class="container modal-content">
       <span class="close float-right" id="close_help">&times;</span>
       <h2>Help</h2>
-      <p>How can I use the Vagrant box locally?</p>
+      <p>How can I use the Vagrant box locally? The answers you will now get from an example.</p>
       <img src="./img/help.jpg" alt="help image with example box">
       <h4>Use cloud repository</h4>
       <p>
         <code>
           # add cloud box to repository<br>
-          $ vagrant box add --insecure demo/centos7 http://example.com/boxes/meta/centos7.json<br><br>
+          $ vagrant box add demo/centos7 http://example.com/boxes/meta/centos7.json<br><br>
           # list all boxes (optional)<br>
           $ vagrant box list<br><br>
           # create Vagrant project<br>
@@ -110,6 +111,7 @@ include './session.php';
         </code>
       </p>
       <h4>Use without cloud repository</h4>
+      <p>Attention: The versioning for boxes is not given!</p>
       <p>
         <code>
           # download box<br>
@@ -120,6 +122,18 @@ include './session.php';
           $ vagrant box list<br><br>
           # create Vagrant project<br>
           $ vagrant init demo/centos7
+        </code>
+      </p>
+      <h4>Local Vagrant boxes</h4>
+      <p>
+        <code>
+          # show local boxes<br>
+          $ vagrant box list<br>
+          demo/centos7 (virtualbox, 1521038207)<br><br>
+          # use box for project<br>
+          $ vagrant init demo/centos7<br><br>
+          # delete box<br>
+          $ vagrant box remove demo/centos7
         </code>
       </p>
     </div>
