@@ -102,7 +102,7 @@ include './session.php';
       <p>
         <code>
           # add cloud box to repository<br>
-          $ vagrant box add --insecure demo/centos7 http://example.com/boxes/meta/centos7.json<br><br>
+          $ vagrant box add demo/centos7 http://example.com/boxes/meta/centos7.json<br><br>
           # list all boxes (optional)<br>
           $ vagrant box list<br><br>
           # create Vagrant project<br>
@@ -120,6 +120,16 @@ include './session.php';
           $ vagrant box list<br><br>
           # create Vagrant project<br>
           $ vagrant init demo/centos7
+        </code>
+      </p>
+      <h4>Vagrant box</h4>
+      <p>
+        <code>
+          # show local boxes<br>
+          $ vagrant box list<br>
+          demo/centos7 (virtualbox, 1521038207)<br><br>
+          # delete box<br>
+          $ vagrant box remove demo/centos7
         </code>
       </p>
     </div>
