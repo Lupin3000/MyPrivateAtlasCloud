@@ -30,7 +30,7 @@ function json_box_info($domain)
   $box_version = $json_data['versions'][0]['version'];
   $box_checksum = $json_data['versions'][0]['providers'][0]['checksum'];
   $box_checksum_type = $json_data['versions'][0]['providers'][0]['checksum_type'];
-  $box_url  = $json_data['versions'][0]['providers'][0]['url'];
+  $box_url = $json_data['versions'][0]['providers'][0]['url'];
 
   array_push($response, array('name' => $box_name,
                               'description' => $box_description,

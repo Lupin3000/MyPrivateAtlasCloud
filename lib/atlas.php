@@ -89,7 +89,9 @@ include './session.php';
     <div class="container modal-content">
       <span class="close float-right" id="close_info">&times;</span>
       <h2><!-- placeholder --></h2>
-      <p><!-- placeholder --></p>
+      <div id="info_content">
+        <!-- placeholder -->
+      </div>
     </div>
   </div>
   <!-- help_modal -->
