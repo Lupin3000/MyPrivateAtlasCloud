@@ -47,6 +47,7 @@ include './session.php';
       </section>
     </nav>
     <div class="container">
+      <h1>Discover the world of Vagrant boxes</h1>
       <table id="boxTable">
         <thead>
           <tr>
@@ -96,7 +97,7 @@ include './session.php';
     <div class="container modal-content">
       <span class="close float-right" id="close_help">&times;</span>
       <h2>Help</h2>
-      <p>How can I use the Vagrant box locally?</p>
+      <p>How can I use the Vagrant box locally? The answers you will now get from an example.</p>
       <img src="./img/help.jpg" alt="help image with example box">
       <h4>Use cloud repository</h4>
       <p>
@@ -110,6 +111,7 @@ include './session.php';
         </code>
       </p>
       <h4>Use without cloud repository</h4>
+      <p>Attention: The versioning for boxes is not given!</p>
       <p>
         <code>
           # download box<br>
@@ -122,12 +124,14 @@ include './session.php';
           $ vagrant init demo/centos7
         </code>
       </p>
-      <h4>Vagrant box</h4>
+      <h4>Local Vagrant boxes</h4>
       <p>
         <code>
           # show local boxes<br>
           $ vagrant box list<br>
           demo/centos7 (virtualbox, 1521038207)<br><br>
+          # use box for project<br>
+          $ vagrant init demo/centos7<br><br>
           # delete box<br>
           $ vagrant box remove demo/centos7
         </code>
