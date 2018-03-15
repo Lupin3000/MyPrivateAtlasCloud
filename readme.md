@@ -30,9 +30,11 @@ $ docker-compose down
 
 ## Use configuration
 
+To edit application configuration, please use the "_./lib/confg/config.ini_"! For Nginx or PHP configuration, please change the files "_./conf/custom.ini_" (_PHP_) and/or "_./conf/default.conf_" (_Nginx_) before you run docker-compose up command.
+
 ```shell
 # edit application configuration
-$ vim lib/config.ini
+$ vim lib/config/config.ini
 ```
 
 ### Change domain
