@@ -1,6 +1,6 @@
 # MyPrivate Vagrant Cloud
 
-With MyPrivate Vagrant Cloud, you can quickly and easily manage your Vagrant boxes. MyPrivate Atlas Cloud act similar as HashiCorp Vagrant Cloud.
+With MyPrivate Vagrant Cloud, you can quickly and easily manage your Vagrant boxes. MyPrivate Atlas Cloud act similar as HashiCorp Vagrant Cloud. You can have a look on my [Packer](https://github.com/Lupin3000/Packer) repository for creating Vagrant base boxes by your self.
 
 ## Installation and start up
 
