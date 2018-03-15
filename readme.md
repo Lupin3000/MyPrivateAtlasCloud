@@ -34,19 +34,14 @@ The HTTP port can be changed via "docker-compose.yml". If needed, you can edit t
 
 To edit application configuration, please use the "_./lib/confg/config.ini_"! 
 
-```shell
-# edit application configuration
-$ vim lib/config/config.ini
-```
-
-### Change domain
+**Change domain**
 
 ```
 [server]
 URL = "http://localhost:8080"
 ```
 
-### Choose different box and json location
+**Choose different box and json location**
 
 Do not forget to change the location path inside "_./conf/default.conf_"!
 
@@ -56,7 +51,7 @@ box_dir = "/boxes/bin/"
 json_dir = "/boxes/meta/"
 ```
 
-### Enable/Disable Login
+**Enable/Disable Login**
 
 ```
 [login]
