@@ -1,12 +1,25 @@
 <?php
 include './session.php';
+
+function return_logout()
+{
+  $ini_array = parse_ini_file('./config/application.ini', true);
+  $security = $ini_array['login']['security'];
+
+  if ($security == "on")
+  {
+    echo '<li class="navigation-item">';
+    echo '<a class="navigation-link" id="logout_btn" href="./logout.php" title="Logout from application">Logout</a>';
+    echo '</li>';
+  }
+}
 ?>
 <!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="description" content="">
+  <meta name="description" content="Simple Vagrant box cloud">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>MyPrivate Vagrant Cloud</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
@@ -32,17 +45,7 @@ include './session.php';
           <li class="navigation-item">
             <a class="navigation-link" id="help_btn" href="#" title="Show help page">Help</a>
           </li>
-          <?php
-          $ini_array = parse_ini_file('./config/application.ini', true);
-          $security = $ini_array['login']['security'];
-
-          if ($security == "on")
-          {
-            echo '<li class="navigation-item">';
-            echo '<a class="navigation-link" id="logout_btn" href="./logout.php" title="Logout from application">Logout</a>';
-            echo '</li>';
-          }
-          ?>
+          <?php return_logout(); ?>
         </ul>
       </section>
     </nav>
