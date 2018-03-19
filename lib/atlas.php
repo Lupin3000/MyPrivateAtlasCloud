@@ -28,6 +28,9 @@ function return_logout()
   <script language="JavaScript" type="text/javascript" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <link rel="stylesheet" href="./css/main.css">
+  <!--[if IE]><link rel="shortcut icon" href="./img/favicon.ico"><![endif]-->
+  <link rel="apple-touch-icon-precomposed" href="./img/cloud.png">
+  <link rel="icon" href="./img/favicon.ico">
 </head>
 <body>
   <div class="wrapper">

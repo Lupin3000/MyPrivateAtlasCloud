@@ -41,6 +41,9 @@ if ($security == "off"){
   <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <link rel="stylesheet" href="./css/main.css">
+  <!--[if IE]><link rel="shortcut icon" href="./img/favicon.ico"><![endif]-->
+  <link rel="apple-touch-icon-precomposed" href="./img/cloud.png">
+  <link rel="icon" href="./img/favicon.ico">
 </head>
 <body>
   <div class="wrapper">
