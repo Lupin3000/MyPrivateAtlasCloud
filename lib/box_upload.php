@@ -60,8 +60,9 @@ function move_file($filename)
 {
   global $response;
   global $box_dir;
+  global $time;
 
-  $newname = $box_dir . $filename;
+  $newname = $box_dir . str_replace('.box', '_' . $time . '.box', $filename);
 
   if (move_uploaded_file($_FILES['boxfile']['tmp_name'], $newname))
   {
