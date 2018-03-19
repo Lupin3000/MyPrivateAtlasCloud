@@ -25,7 +25,8 @@ function create_update_json($newname)
 
   $checksum = sha1_file($newname);
   $box_name = basename($newname);
-  $json_name = str_replace('.box', '', $meta_dir . $box_name) . '.json';
+  //$json_name = str_replace('.box', '', $meta_dir . $box_name) . '.json';
+  $json_name = $meta_dir . str_replace('/', '_', transform_input($_POST['boxname'])) . '.json';
 
   $content = array(
     'name' => transform_input($_POST['boxname']),
