@@ -119,7 +119,7 @@ function return_logout()
         </code>
       </p>
       <h4>Use without cloud repository</h4>
-      <p>Attention: The versioning for boxes is not given!</p>
+      <p>Attention: The versioning for boxes is not automaticaly given!</p>
       <p>
         <code>
           # download box<br>
