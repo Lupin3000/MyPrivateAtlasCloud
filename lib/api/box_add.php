@@ -103,7 +103,7 @@ function check_file_upload()
 
 if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
 {
-  if (strcmp($_SERVER['REQUEST_METHOD'], 'POST') == 0)
+  if (strcmp($_SERVER['REQUEST_METHOD'], 'POST') == 0 && (isset($_POST['boxname'])) && (isset($_POST['boxprovider'])))
   {
     check_file_upload();
   } else {
