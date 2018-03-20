@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-$ini_array = parse_ini_file('./config/application.ini', true);
+$ini_array = parse_ini_file('../config/application.ini', true);
 $domain = $ini_array['server']['URL'];
+$html_path = $ini_array['repository']['html_path'];
 $meta_dir = $ini_array['repository']['json_dir'];
-$glob_pattern = dirname(__FILE__) . $meta_dir . '*.json';
+$glob_pattern = $meta_dir . '*.json';
 $response = array();
 
 function truncate($string, $length=100, $append="...")
@@ -22,6 +23,7 @@ function truncate($string, $length=100, $append="...")
 function json_box_list($domain, $meta_dir, $glob_pattern)
 {
   global $response;
+  global $html_path;
 
   $response['status'] = true;
   $response['message'] = 'The list of current boxes';
@@ -32,6 +34,7 @@ function json_box_list($domain, $meta_dir, $glob_pattern)
     $json_data = json_decode($file_data, true);
 
     $json_url = $domain . $meta_dir . basename($entry);
+    $json_url = str_replace($html_path, '', $json_url);
     $box_name = $json_data['name'];
     $box_description = truncate($json_data['description'], 25, '...');
     $box_provider = $json_data['versions'][0]['providers'][0]['name'];
