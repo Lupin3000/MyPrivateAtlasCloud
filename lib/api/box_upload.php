@@ -3,9 +3,9 @@ session_start();
 
 $ini_array = parse_ini_file('../config/application.ini', true);
 $domain = $ini_array['server']['URL'];
-$box_dir = dirname(__FILE__) . $ini_array['repository']['box_dir'];
-$meta_dir = dirname(__FILE__) . $ini_array['repository']['json_dir'];
-$box_url = $domain . str_replace(dirname(__FILE__), '', $box_dir);
+$html_path = $ini_array['repository']['html_path'];
+$box_dir = $ini_array['repository']['box_dir'];
+$meta_dir = $ini_array['repository']['json_dir'];
 $time = time();
 $response = array();
 
@@ -19,14 +19,17 @@ function transform_input($value='')
 function create_update_json($newname)
 {
   global $response;
+  global $html_path;
   global $meta_dir;
-  global $box_url;
+  global $box_dir;
+  global $domain;
   global $time;
 
   $checksum = sha1_file($newname);
-  $box_name = basename($newname);
-  //$json_name = str_replace('.box', '', $meta_dir . $box_name) . '.json';
-  $json_name = $meta_dir . str_replace('/', '_', transform_input($_POST['boxname'])) . '.json';
+  $box_file = basename($newname);
+  $json_file = str_replace('/', '_', transform_input($_POST['boxname'])) . '.json';
+  $json_path = $meta_dir . $json_file;
+  $box_url = $domain . str_replace($html_path, '', $box_dir) . $box_file;
 
   $content = array(
     'name' => transform_input($_POST['boxname']),
@@ -37,7 +40,7 @@ function create_update_json($newname)
         'providers' => array(
           array(
             'name' => transform_input($_POST['boxprovider']),
-            'url' => $box_url . $box_name,
+            'url' => $box_url,
             'checksum_type' => 'sha1',
             'checksum' => $checksum
           )
@@ -47,14 +50,15 @@ function create_update_json($newname)
   );
 
   $json_data = json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-  file_put_contents($json_name, $json_data);
+  file_put_contents($json_path, $json_data);
 
   $response['status'] = true;
   $response['message'] = 'Your box is successful uploaded';
-  $response['name'] = $_POST['boxname'];
-  $response['provider'] = $_POST['boxprovider'];
-  $response['description'] = $_POST['boxdescription'];
-  $response['file'] = $_FILES['boxfile']['name'];
+  $response['name'] = transform_input($_POST['boxname']);
+  $response['provider'] = transform_input($_POST['boxprovider']);
+  $response['description'] = transform_input($_POST['boxdescription']);
+  $response['box'] = $box_file;
+  $response['json'] = $json_file;
 }
 
 function move_file($filename)
