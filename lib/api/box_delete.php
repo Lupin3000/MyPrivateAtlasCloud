@@ -35,10 +35,10 @@ function json_box_delete()
     unlink($box_path);
   }
 
-  $response['json_path'] = $json_path;
-  $response['box_path'] = $box_path;
+  $response['json_file'] = $json_file;
+  $response['box_file'] = basename(parse_url($box_file, PHP_URL_PATH));
   $response['status'] = true;
-  $response['message'] = 'Box successful deleted';
+  $response['message'] = 'All files successful deleted';
 }
 
 if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
