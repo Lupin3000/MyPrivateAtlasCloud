@@ -30,9 +30,17 @@ $ docker-compose down
 
 ## Configuration
 
-The HTTP port can be changed via "docker-compose.yml". If needed, you can edit the configuration for Nginx (_./src/default.conf_) and/or PHP (_./src/custom.ini_). Please change these files before you run docker-compose up command.
+### Environment
 
-To edit application configuration, please use the "./lib/config/application.ini"! 
+Please change these files before you run docker-compose up command!!!
+
+- Docker containers are configured via "_./docker-compose.yml_"
+- Nginx is configured via "_./src/default.conf_"
+- PHP is configured via "_./src/custom.ini_"
+
+### Application
+
+To edit application configuration, please use the "./lib/config/application.ini"!
 
 **Change domain**
 
@@ -43,12 +51,18 @@ URL = "http://localhost:8080"
 
 **Choose different box and json location**
 
-Do not forget to change the location path inside "_./src/default.conf_"!
+Do not forget to change the nginx location path inside "_./src/default.conf_"!
 
 ```
 [repository]
-box_dir = "/boxes/bin/"
-json_dir = "/boxes/meta/"
+; full path to default location
+html_path = "/var/www/html/"
+
+; full path to box directory
+box_dir = "/var/www/html/boxes/bin/"
+
+; full path to json directory
+json_dir = "/var/www/html/boxes/meta/"
 ```
 
 **Enable/Disable Login**
