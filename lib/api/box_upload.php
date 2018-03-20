@@ -78,7 +78,7 @@ function move_file($filename)
   }
 }
 
-function check_file()
+function check_file_upload()
 {
   global $response;
 
@@ -105,7 +105,7 @@ if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
 {
   if (strcmp($_SERVER['REQUEST_METHOD'], 'POST') == 0)
   {
-    check_file();
+    check_file_upload();
   } else {
     $response['status'] = false;
     $response['message'] = 'Bad request';
