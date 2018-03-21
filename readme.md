@@ -21,6 +21,15 @@ $ docker-compose logs -f
 $ open -a Safari http://localhost:8080/
 ```
 
+## Stop and Start environment
+```shell
+# stop
+$ docker-compose stop
+
+# start
+$ docker-compose start
+```
+
 ## Destroy environment
 
 ```shell
