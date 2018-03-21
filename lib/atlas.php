@@ -77,11 +77,11 @@ function return_logout()
       <form id="boxUploadForm">
         <fieldset>
           <label for="boxname">Box Name</label>
-          <input type="text" placeholder="box/name" name="boxname" id="boxname" required>
+          <input type="text" placeholder="box/name" name="boxname" id="boxname" maxlength="50" required>
           <label for="boxprovider">Provider</label>
-          <input type="text" placeholder="virtualbox" name="boxprovider" id="boxprovider" required>
+          <input type="text" placeholder="virtualbox" name="boxprovider" id="boxprovider" maxlength="25" required>
           <label for="boxdescription">Description</label>
-          <input type="text" placeholder="lorem ipsum dolor" name="boxdescription" id="boxdescription" required>
+          <input type="text" placeholder="lorem ipsum dolor" name="boxdescription" id="boxdescription" maxlength="80" required>
           <label for="boxfile">Box</label>
           <input type="file" name="boxfile" id="boxfile" required>
           <br>

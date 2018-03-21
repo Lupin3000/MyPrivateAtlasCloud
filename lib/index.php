@@ -60,9 +60,9 @@ if ($security == "off"){
       <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <fieldset>
           <label for="user">Name</label>
-          <input type="text" placeholder="Username" name="user" id="user">
+          <input type="text" placeholder="Username" name="user" id="user" maxlength="50">
           <label for="passwd">Name</label>
-          <input type="password" placeholder="*****" name="passwd" id="passwd">
+          <input type="password" placeholder="*****" name="passwd" id="passwd" maxlength="50">
           <input class="button-primary" type="submit" name="login" value="Login">
         </fieldset>
       </form>
