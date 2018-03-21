@@ -62,6 +62,6 @@ if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
 }
 
 header('Access-Control-Allow-Origin: *');
-header('Content-type: application/json');
+header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($response);
 ?>
