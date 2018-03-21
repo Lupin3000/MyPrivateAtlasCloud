@@ -16,19 +16,16 @@ function transform_input($value='')
   return $value;
 }
 
-function create_update_json($newname)
+function create_update_json($box_path, $json_path)
 {
   global $response;
   global $html_path;
-  global $meta_dir;
   global $box_dir;
   global $domain;
   global $time;
 
-  $checksum = sha1_file($newname);
-  $box_file = basename($newname);
-  $json_file = str_replace('/', '_', transform_input($_POST['boxname'])) . '.json';
-  $json_path = $meta_dir . $json_file;
+  $checksum = sha1_file($box_path);
+  $box_file = basename($box_path);
   $box_url = $domain . str_replace($html_path, '', $box_dir) . $box_file;
 
   $content = array(
@@ -61,17 +58,17 @@ function create_update_json($newname)
   $response['json'] = $json_file;
 }
 
-function move_file($filename)
+function move_file($filename, $json_path)
 {
   global $response;
   global $box_dir;
   global $time;
 
-  $newname = $box_dir . str_replace('.box', '_' . $time . '.box', $filename);
+  $box_path = $box_dir . str_replace('.box', '_' . $time . '.box', $filename);
 
-  if (move_uploaded_file($_FILES['boxfile']['tmp_name'], $newname))
+  if (move_uploaded_file($_FILES['boxfile']['tmp_name'], $box_path))
   {
-    create_update_json($newname);
+    create_update_json($box_path, $json_path);
   } else {
     $response['status'] = false;
     $response['message'] = 'Could not move upload to target dir';
@@ -81,16 +78,25 @@ function move_file($filename)
 function check_file_upload()
 {
   global $response;
+  global $meta_dir;
 
   if((!empty($_FILES["boxfile"])) && ($_FILES['boxfile']['error'] == 0))
   {
     $filename = basename($_FILES['boxfile']['name']);
     $ext = substr($filename, strrpos($filename, '.') + 1);
     $mime = mime_content_type($_FILES['boxfile']['tmp_name']);
+    $json_file = str_replace('/', '_', transform_input($_POST['boxname'])) . '.json';
+    $json_path = $meta_dir . $json_file;
 
     if (($ext === "box") && ($mime === "application/x-gzip"))
     {
-      move_file($filename);
+      if (file_exists($json_path))
+      {
+        $response['status'] = false;
+        $response['message'] = 'Vagrant box already exists!';
+      } else {
+        move_file($filename, $json_path);
+      }
     } else {
       $response['status'] = false;
       $response['message'] = 'You upload a Vagrant box?';
