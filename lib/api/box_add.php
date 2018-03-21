@@ -55,7 +55,7 @@ function create_update_json($box_path, $json_path)
   $response['provider'] = transform_input($_POST['boxprovider']);
   $response['description'] = transform_input($_POST['boxdescription']);
   $response['box'] = $box_file;
-  $response['json'] = $json_file;
+  $response['json'] = basename($json_path);
 }
 
 function move_file($filename, $json_path)
