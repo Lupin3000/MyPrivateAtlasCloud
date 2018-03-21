@@ -1,7 +1,8 @@
 version: '3'
 services:
   web:
-    image: nginx:latest
+#    image: nginx:latest
+    image: nginx:1.13.9-alpine
     container_name: nginx
     restart: always
     ports:
@@ -11,27 +12,12 @@ services:
       - ./lib:/var/www/html
     links:
       - fpm
-#    depends_on:
-#      - mysql
-#      - fpm
+    depends_on:
+      - fpm
   fpm:
-    image: php:7-fpm
+#    image: php:7-fpm
+    image: php:7.1.15-fpm-alpine3.4
     container_name: php
     volumes:
       - ./src/custom.ini:/usr/local/etc/php/conf.d/custom.ini
       - ./lib:/var/www/html
-#    links:
-#      - mysql
-#    depends_on:
-#      - mysql
-#  mysql:
-#    image: mysql
-#    container_name: mysql
-#    restart: always
-#    ports:
-#      - "3306:3306"
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=root
-#      - MYSQL_DATABASE=db
-#      - MYSQL_USER=root
-#      - MYSQL_PASSWORD=test123
