@@ -5,6 +5,15 @@ code {
   white-space: normal;
   overflow: auto;
 }
+
+#flip {
+    padding: 5px 0;
+    cursor: pointer;
+}
+#update_box {
+    display: none;
+}
+
 .wrapper {
   display: block;
   position: relative;

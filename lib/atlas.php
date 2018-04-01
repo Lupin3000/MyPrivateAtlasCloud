@@ -98,6 +98,20 @@ function return_logout()
       <div id="info_content">
         <!-- placeholder -->
       </div>
+      <div id="flip">
+        <h3>Update Box</h3>
+      </div>
+      <div id="update_box">
+        <form id="boxUpdateForm">
+          <input type="hidden" name="boxname" id="boxname_add" value="">
+          <label for="boxfile">Box</label>
+          <input type="file" name="boxfile" id="boxfile_add" required>
+          <fieldset>
+            <br>
+            <input class="button-primary" type="submit" value="Send">
+          </fieldset>
+        </form>
+      </div>
     </div>
   </div>
   <!-- help_modal -->
