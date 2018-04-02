@@ -33,19 +33,11 @@ function json_box_list($domain, $meta_dir, $glob_pattern)
     $file_data = file_get_contents($entry);
     $json_data = json_decode($file_data, true);
 
-    $json_url = $domain . $meta_dir . basename($entry);
-    $json_url = str_replace($html_path, '', $json_url);
     $box_name = $json_data['name'];
     $box_description = truncate($json_data['description'], 25, '...');
     $box_provider = $json_data['versions'][0]['providers'][0]['name'];
-    $box_url  = $json_data['versions'][0]['providers'][0]['url'];
-    $box_version = $json_data['versions'][0]['version'];
-    $box_checksum = $json_data['versions'][0]['providers'][0]['checksum'];
-    $box_checksum_type = $json_data['versions'][0]['providers'][0]['checksum_type'];
 
-    array_push($response, array('json_url' => $json_url,
-                                'box_url' => $box_url,
-                                'name' => $box_name,
+    array_push($response, array('name' => $box_name,
                                 'description' => $box_description,
                                 'provider' => $box_provider));
   }
