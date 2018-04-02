@@ -95,22 +95,43 @@ function return_logout()
     <div class="container modal-content">
       <span class="close float-right" id="close_info">&times;</span>
       <h2><!-- placeholder --></h2>
-      <div id="info_content">
-        <!-- placeholder -->
-      </div>
-      <div id="flip">
-        <h3>Update Box</h3>
-      </div>
-      <div id="update_box">
-        <form id="boxUpdateForm">
-          <input type="hidden" name="boxname" id="boxname_add" value="">
-          <label for="boxfile">Box</label>
-          <input type="file" name="boxfile" id="boxfile_add" required>
-          <fieldset>
+      <div class="tabs">
+        <ul class="tab-links">
+          <li class="active">
+            <a href="#tab1">Info</a>
+          </li>
+          <li>
+            <a href="#tab2">Update</a>
+          </li>
+          <li>
+            <a href="#tab3">Extra</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="tab1" class="tab active">
+            <!-- placeholder -->
+          </div>
+          <div id="tab2" class="tab">
+            <form id="boxUpdateForm">
+              <fieldset>
+                <input type="hidden" name="boxname" id="boxname_put" value="">
+                <label for="boxdescription_put">Description</label>
+                <input type="text" placeholder="lorem ipsum dolor" name="boxdescription" id="boxdescription_put" maxlength="80" value="" required>
+                <label for="boxfile_put">Box</label>
+                <input type="file" name="boxfile" id="boxfile_put" required>
+                <br>
+                <input class="button-primary" type="submit" value="Send">
+              </fieldset>
+            </form>
+          </div>
+          <div id="tab3" class="tab">
+            <strong>Example</strong>
+            <code><!-- placeholder --></code>
             <br>
-            <input class="button-primary" type="submit" value="Send">
-          </fieldset>
-        </form>
+            <strong>Files</strong>
+            <p><!-- placeholder --></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

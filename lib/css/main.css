@@ -6,14 +6,6 @@ code {
   overflow: auto;
 }
 
-#flip {
-    padding: 5px 0;
-    cursor: pointer;
-}
-#update_box {
-    display: none;
-}
-
 .wrapper {
   display: block;
   position: relative;
@@ -103,4 +95,44 @@ code {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+.tabs {
+  display: inline-block;
+  width: 100%;
+}
+.tab-links:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+.tab-links li {
+  margin: 0px 5px;
+  list-style: none;
+  float: left;
+}
+.tab-links a {
+  display: inline-block;
+  padding: 9px 15px;
+  background: #7FB5DA;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4c4c4c;
+  transition: all linear 0.15s;
+}
+.tab-links a:hover {
+  background: #a7cce5;
+  text-decoration: none;
+}
+li.active a, li.active a:hover {
+  background: #fff;
+  color: #4c4c4c;
+}
+.tab-content {
+  background: #fff;
+}
+.tab {
+  display: none;
+}
+.tab.active {
+  display: block;
 }
