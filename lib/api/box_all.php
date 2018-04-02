@@ -37,7 +37,8 @@ function json_box_list($domain, $meta_dir, $glob_pattern)
     $box_description = truncate($json_data['description'], 25, '...');
     $box_provider = $json_data['versions'][0]['providers'][0]['name'];
 
-    array_push($response, array('name' => $box_name,
+    array_push($response, array('box' => basename(str_replace('.json', '', $entry)),
+                                'name' => $box_name,
                                 'description' => $box_description,
                                 'provider' => $box_provider));
   }

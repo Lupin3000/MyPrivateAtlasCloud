@@ -6,6 +6,6 @@
 
 ## Prio 2
 
-- modify request headers on jquery requests
+- modify POST/DELETE/PUT headers for ajax
 - add front-end table sort/filter function
 - add round trip waiting animations
