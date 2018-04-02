@@ -2,10 +2,13 @@
 
 ## Prio 1
 
-- add box update feature
+- create update box feature (by config max versions)
+- modify delete box feature (remove all boxes)
 
 ## Prio 2
 
-- modify POST/DELETE/PUT headers for ajax
+- refactor box bin name (only timestamp)
+- modify box info (get latest version, show all versions, show box bin size)
+- modify DELETE/PUT headers for ajax
 - add front-end table sort/filter function
-- add round trip waiting animations
+- add ajax load animations
