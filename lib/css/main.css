@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+a[class="button info_btn"] {
+  margin-right: 5px;
+}
 code {
   display: block;
   white-space: normal;

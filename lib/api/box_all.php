@@ -26,7 +26,7 @@ function json_box_list($domain, $meta_dir, $glob_pattern)
   global $html_path;
 
   $response['status'] = true;
-  $response['message'] = 'The list of current boxes';
+  $response['message'] = 'List of current boxes';
 
   foreach (array_filter(glob($glob_pattern), 'is_file') as $entry)
   {
