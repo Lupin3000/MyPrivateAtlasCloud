@@ -11,3 +11,4 @@
 - modify DELETE/PUT headers for ajax
 - add front-end table sort/filter function
 - add ajax load animations
+- improve history (created, size)

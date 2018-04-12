@@ -95,6 +95,7 @@ function return_logout()
     <div class="container modal-content">
       <span class="close float-right" id="close_info">&times;</span>
       <h2><!-- placeholder --></h2>
+      <p><!-- placeholder --></p>
       <div class="tabs">
         <ul class="tab-links">
           <li class="active">
@@ -105,6 +106,12 @@ function return_logout()
           </li>
           <li>
             <a href="#tab3">Extra</a>
+          </li>
+          <li>
+            <a href="#tab4">History</a>
+          </li>
+          <li>
+            <a href="#tab5">Help</a>
           </li>
         </ul>
         <div class="tab-content">
@@ -125,11 +132,15 @@ function return_logout()
             </form>
           </div>
           <div id="tab3" class="tab">
-            <strong>Example</strong>
-            <code><!-- placeholder --></code>
-            <br>
             <strong>Files</strong>
             <p><!-- placeholder --></p>
+          </div>
+          <div id="tab4" class="tab">
+            <!-- placeholder -->
+          </div>
+          <div id="tab5" class="tab">
+            <strong>Usage</strong>
+            <code><!-- placeholder --></code>
           </div>
         </div>
       </div>
