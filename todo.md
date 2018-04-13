@@ -2,7 +2,6 @@
 
 ## Prio 1
 
-- modify box info (get latest version, show all versions, show box bin size)
 - create update box feature (by config max versions)
 
 ## Prio 2

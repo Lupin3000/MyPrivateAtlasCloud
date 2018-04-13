@@ -5,6 +5,7 @@ $ini_array = parse_ini_file('../config/application.ini', true);
 $domain = $ini_array['server']['URL'];
 $html_path = $ini_array['repository']['html_path'];
 $meta_dir = $ini_array['repository']['json_dir'];
+$box_dir = $ini_array['repository']['box_dir'];
 $response = array();
 
 function transform_input($value='')
@@ -14,11 +15,20 @@ function transform_input($value='')
   return $value;
 }
 
+function filesize_formatted($path)
+{
+  $size = filesize($path);
+  $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+  $power = $size > 0 ? floor(log($size, 1024)) : 0;
+  return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+}
+
 function json_box_info($domain)
 {
   global $response;
   global $html_path;
   global $meta_dir;
+  global $box_dir;
   global $domain;
 
   $json_file = str_replace('/', '_', transform_input($_GET['name'])) . '.json';
@@ -31,7 +41,12 @@ function json_box_info($domain)
 
   foreach ($json_data['versions'] as $item) {
     $all_versions[] = $item['version'];
-    array_push($response['boxes'], array('version' => $item['version'],
+    $box = basename(parse_url($item['providers'][0]['url'], PHP_URL_PATH));
+    $box_path = $box_dir . $box;
+
+    array_push($response['boxes'], array('size' => filesize_formatted($box_path),
+                                         'created' => date("F d Y H:i:s", filemtime($box_path)),
+                                         'version' => $item['version'],
                                          'provider' => $item['providers'][0]['name'],
                                          'url' => $item['providers'][0]['url'],
                                          'checksum_type' => $item['providers'][0]['checksum_type'],

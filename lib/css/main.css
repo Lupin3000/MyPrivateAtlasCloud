@@ -139,3 +139,7 @@ li.active a, li.active a:hover {
 .tab.active {
   display: block;
 }
+.tab > ul > li {
+  margin: 0;
+  padding: 0;
+}

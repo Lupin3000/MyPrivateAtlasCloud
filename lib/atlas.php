@@ -116,7 +116,8 @@ function return_logout()
         </ul>
         <div class="tab-content">
           <div id="tab1" class="tab active">
-            <!-- placeholder -->
+            <strong><!-- placeholder --></strong>
+            <ul><!-- placeholder --></ul>
           </div>
           <div id="tab2" class="tab">
             <form id="boxUpdateForm">
@@ -136,7 +137,7 @@ function return_logout()
             <p><!-- placeholder --></p>
           </div>
           <div id="tab4" class="tab">
-            <!-- placeholder -->
+            <ul><!-- placeholder --></ul>
           </div>
           <div id="tab5" class="tab">
             <strong>Usage</strong>
