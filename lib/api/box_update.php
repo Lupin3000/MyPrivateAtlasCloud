@@ -32,10 +32,7 @@ function update_json($box_path, $json_path)
   $file_data = file_get_contents($json_path);
   $json_data = json_decode($file_data, true);
 
-  // update description as test
   $json_data['description'] = transform_input($_POST['boxdescription']);
-
-  // create new object to add
   $new_box_obj = array(
     'version' => (string) $time,
     'providers' => array(
@@ -47,11 +44,21 @@ function update_json($box_path, $json_path)
       )
     )
   );
-  // add new object to json array
   array_push($json_data['versions'], $new_box_obj);
-
-  // update boxes on storage by max versions
-  // modify JSON file by update versions
+  // delete old versions and update JSON
+  // $response['deleted'] = array();
+  // while ((int) count($json_data['versions']) > (int) $versions)
+  // {
+  //   $box_min_url = min($json_data['versions'])['providers'][0]['url'];
+  //   $box_min_version = min($json_data['versions'])['version'];
+  //   $box_min_path = $box_dir . basename(parse_url($box_min_url, PHP_URL_PATH));
+  //   if (is_file($box_min_path))
+  //   {
+  //     unlink($box_min_path);
+  //     array_push($response['deleted'], basename(parse_url($box, PHP_URL_PATH)));
+  //     unset($json_data['versions'][$box_min_version]);
+  //   }
+  // }
 
   // write to file and close
   $json_data = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
