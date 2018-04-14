@@ -16,7 +16,7 @@ function transform_input($value='')
   return $value;
 }
 
-function create_update_json($box_path, $json_path)
+function create_json($box_path, $json_path)
 {
   global $response;
   global $html_path;
@@ -68,7 +68,7 @@ function move_file($filename, $json_path)
 
   if (move_uploaded_file($_FILES['boxfile']['tmp_name'], $box_path))
   {
-    create_update_json($box_path, $json_path);
+    create_json($box_path, $json_path);
   } else {
     $response['status'] = false;
     $response['message'] = 'Could not move upload to target dir';

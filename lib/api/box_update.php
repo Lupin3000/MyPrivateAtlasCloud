@@ -2,6 +2,12 @@
 session_start();
 
 $ini_array = parse_ini_file('../config/application.ini', true);
+$domain = $ini_array['server']['URL'];
+$versions = $ini_array['repository']['versions'];
+$html_path = $ini_array['repository']['html_path'];
+$box_dir = $ini_array['repository']['box_dir'];
+$meta_dir = $ini_array['repository']['json_dir'];
+$time = time();
 $response = array();
 
 function transform_input($value='')
@@ -11,14 +17,102 @@ function transform_input($value='')
   return $value;
 }
 
+function update_json($box_path, $json_path)
+{
+  global $response;
+  global $versions;
+  global $box_dir;
+  global $html_path;
+  global $domain;
+  global $time;
+
+  $checksum = sha1_file($box_path);
+  $box_file = basename($box_path);
+  $box_url = $domain . str_replace($html_path, '', $box_dir) . $box_file;
+  $file_data = file_get_contents($json_path);
+  $json_data = json_decode($file_data, true);
+
+  // update description as test
+  $json_data['description'] = transform_input($_POST['boxdescription']);
+
+  // create new object to add
+  $new_box_obj = array(
+    'version' => (string) $time,
+    'providers' => array(
+      array(
+        'name' => transform_input($_POST['boxprovider']),
+        'url' => $box_url,
+        'checksum_type' => 'sha1',
+        'checksum' => $checksum
+      )
+    )
+  );
+  // add new object to json array
+  array_push($json_data['versions'], $new_box_obj);
+
+  // update boxes on storage by max versions
+  // modify JSON file by update versions
+
+  // write to file and close
+  $json_data = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  file_put_contents($json_path, $json_data);
+
+  $response['status'] = true;
+  $response['message'] = 'Your box is successful updated';
+  $response['name'] = transform_input($_POST['boxname']);
+  $response['provider'] = transform_input($_POST['boxprovider']);
+  $response['description'] = transform_input($_POST['boxdescription']);
+  $response['box'] = $box_file;
+  $response['json'] = basename($json_path);
+}
+
+function move_file($filename, $json_path)
+{
+  global $response;
+  global $box_dir;
+  global $time;
+
+  $box_path = $box_dir . str_replace('.box', '_' . $time . '.box', $filename);
+
+  if (move_uploaded_file($_FILES['boxfile']['tmp_name'], $box_path))
+  {
+    update_json($box_path, $json_path);
+  } else {
+    $response['status'] = false;
+    $response['message'] = 'Could not move upload to target dir';
+  }
+}
+
 function check_file_upload()
 {
   global $response;
+  global $meta_dir;
 
-  $json_file = str_replace('/', '_', transform_input($_POST['boxname'])) . '.json';
+  if((!empty($_FILES["boxfile"])) && ($_FILES['boxfile']['error'] == 0))
+  {
+    $filename = basename($_FILES['boxfile']['name']);
+    $ext = substr($filename, strrpos($filename, '.') + 1);
+    $mime = mime_content_type($_FILES['boxfile']['tmp_name']);
+    $json_file = str_replace('/', '_', transform_input($_POST['boxname'])) . '.json';
+    $json_path = $meta_dir . $json_file;
 
-  $response['status'] = false;
-  $response['message'] = 'Debug/Develop: file upload check' . $json_file;
+    if (($ext === "box") && ($mime === "application/x-gzip"))
+    {
+      if (file_exists($json_path))
+      {
+        move_file($filename, $json_path);
+      } else {
+        $response['status'] = false;
+        $response['message'] = 'Vagrant box not found!';
+      }
+    } else {
+      $response['status'] = false;
+      $response['message'] = 'You upload a Vagrant box?';
+    }
+  } else {
+    $response['status'] = false;
+    $response['message'] = 'Something went wrong with upload.';
+  }
 }
 
 if ((isset($_SESSION['valid'])) && (isset($_SESSION['user']))) {

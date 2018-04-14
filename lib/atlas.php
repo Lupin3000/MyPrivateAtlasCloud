@@ -123,6 +123,8 @@ function return_logout()
             <form id="boxUpdateForm">
               <fieldset>
                 <input type="hidden" name="boxname" id="boxname_put" value="">
+                <label for="boxprovider_put">Provider</label>
+                <input type="text" placeholder="virtualbox" name="boxprovider" id="boxprovider_put" maxlength="25" value="" required>
                 <label for="boxdescription_put">Description</label>
                 <input type="text" placeholder="lorem ipsum dolor" name="boxdescription" id="boxdescription_put" maxlength="80" value="" required>
                 <label for="boxfile_put">Box</label>
