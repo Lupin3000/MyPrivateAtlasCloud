@@ -45,20 +45,22 @@ function update_json($box_path, $json_path)
     )
   );
   array_push($json_data['versions'], $new_box_obj);
-  // delete old versions and update JSON
-  // $response['deleted'] = array();
-  // while ((int) count($json_data['versions']) > (int) $versions)
-  // {
-  //   $box_min_url = min($json_data['versions'])['providers'][0]['url'];
-  //   $box_min_version = min($json_data['versions'])['version'];
-  //   $box_min_path = $box_dir . basename(parse_url($box_min_url, PHP_URL_PATH));
-  //   if (is_file($box_min_path))
-  //   {
-  //     unlink($box_min_path);
-  //     array_push($response['deleted'], basename(parse_url($box, PHP_URL_PATH)));
-  //     unset($json_data['versions'][$box_min_version]);
-  //   }
-  // }
+
+  $response['deleted'] = array();
+  if ((int) count($json_data['versions']) > (int) $versions)
+  {
+    $box_min_url = min($json_data['versions'])['providers'][0]['url'];
+    $box_min_version = min($json_data['versions'])['version'];
+    $box_min_path = $box_dir . basename(parse_url($box_min_url, PHP_URL_PATH));
+    $array_key = array_search($box_min_version, array_column($json_data['versions'], 'version'));
+    if (is_file($box_min_path))
+    {
+      unlink($box_min_path);
+      array_splice($json_data['versions'], $array_key, 1);
+      array_push($response['deleted'], array('version' => $box_min_version,
+                                             'box' => basename(parse_url($box_min_url, PHP_URL_PATH))));
+    }
+  }
 
   // write to file and close
   $json_data = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
