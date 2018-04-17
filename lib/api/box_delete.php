@@ -25,12 +25,12 @@ function json_box_delete()
   $json_path = $meta_dir . $json_file;
   $file_data = file_get_contents($json_path);
   $json_data = json_decode($file_data, true);
-  $boxes = array();
+  $response['deleted'] = array();
 
   foreach ($json_data['versions'] as $item) {
     $box = basename(parse_url($item['providers'][0]['url'], PHP_URL_PATH));
     $box_path = $box_dir . $box;
-    $boxes[] = $box;
+    array_push($response['deleted'], array('box' => $box));
 
     if (is_file($box_path)) {
       unlink($box_path);
@@ -42,7 +42,6 @@ function json_box_delete()
   }
 
   $response['json_file'] = $json_file;
-  $response['box_files'] = $boxes;
   $response['status'] = true;
   $response['message'] = 'All files successful deleted';
 }

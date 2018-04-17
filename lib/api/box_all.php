@@ -27,6 +27,7 @@ function json_box_list($domain, $meta_dir, $glob_pattern)
 
   $response['status'] = true;
   $response['message'] = 'List of current boxes';
+  $response['boxes'] = array();
 
   foreach (array_filter(glob($glob_pattern), 'is_file') as $entry)
   {
@@ -37,10 +38,10 @@ function json_box_list($domain, $meta_dir, $glob_pattern)
     $box_description = truncate($json_data['description'], 25, '...');
     $box_provider = $json_data['versions'][0]['providers'][0]['name'];
 
-    array_push($response, array('box' => basename(str_replace('.json', '', $entry)),
-                                'name' => $box_name,
-                                'description' => $box_description,
-                                'provider' => $box_provider));
+    array_push($response['boxes'], array('box' => basename(str_replace('.json', '', $entry)),
+                                         'name' => $box_name,
+                                         'description' => $box_description,
+                                         'provider' => $box_provider));
   }
 }
 

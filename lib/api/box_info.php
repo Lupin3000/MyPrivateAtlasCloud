@@ -37,20 +37,20 @@ function json_box_info($domain)
   $json_data = json_decode($file_data, true);
   $json_url = $domain . str_replace($html_path, '', $meta_dir) . $json_file;
   $all_versions = array();
-  $response['boxes'] = array();
+  $response['versions'] = array();
 
   foreach ($json_data['versions'] as $item) {
     $all_versions[] = $item['version'];
     $box = basename(parse_url($item['providers'][0]['url'], PHP_URL_PATH));
     $box_path = $box_dir . $box;
 
-    array_push($response['boxes'], array('size' => filesize_formatted($box_path),
-                                         'created' => date("F d Y H:i:s", filemtime($box_path)),
-                                         'version' => $item['version'],
-                                         'provider' => $item['providers'][0]['name'],
-                                         'url' => $item['providers'][0]['url'],
-                                         'checksum_type' => $item['providers'][0]['checksum_type'],
-                                         'checksum' => $item['providers'][0]['checksum']));
+    array_push($response['versions'], array('size' => filesize_formatted($box_path),
+                                            'created' => date("F d Y H:i:s", filemtime($box_path)),
+                                            'version' => $item['version'],
+                                            'provider' => $item['providers'][0]['name'],
+                                            'url' => $item['providers'][0]['url'],
+                                            'checksum_type' => $item['providers'][0]['checksum_type'],
+                                            'checksum' => $item['providers'][0]['checksum']));
   }
 
   $latest_v = max($all_versions);
