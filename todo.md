@@ -2,7 +2,6 @@
 
 ## Prio 1
 
-- ux behaviours (CRUD)
 - add ajax load animations
 
 ## Prio 2

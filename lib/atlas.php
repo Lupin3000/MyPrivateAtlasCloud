@@ -195,6 +195,12 @@ function return_logout()
       </p>
     </div>
   </div>
+  <div class="load">
+    <div class="load_info">
+      <img src="./img/ajax-loader.gif" alt="loading ... please wait"><br>
+      please wait...
+    </div>
+  </div>
   <script language="JavaScript" type="text/javascript" src="./js/box.js"></script>
 </body>
 </html>
