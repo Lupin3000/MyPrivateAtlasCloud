@@ -27,6 +27,7 @@ function create_json($box_path, $json_path)
   $checksum = sha1_file($box_path);
   $box_file = basename($box_path);
   $box_url = $domain . str_replace($html_path, '', $box_dir) . $box_file;
+  $json_url = $domain . str_replace($html_path, '', $json_path);
 
   $content = array(
     'name' => transform_input($_POST['boxname']),
@@ -54,8 +55,8 @@ function create_json($box_path, $json_path)
   $response['name'] = transform_input($_POST['boxname']);
   $response['provider'] = transform_input($_POST['boxprovider']);
   $response['description'] = transform_input($_POST['boxdescription']);
-  $response['box'] = $box_file;
-  $response['json'] = basename($json_path);
+  $response['box'] = $box_url;
+  $response['json'] = $json_url;
 }
 
 function move_file($filename, $json_path)

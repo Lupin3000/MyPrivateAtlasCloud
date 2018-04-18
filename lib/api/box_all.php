@@ -33,12 +33,13 @@ function json_box_list($domain, $meta_dir, $glob_pattern)
   {
     $file_data = file_get_contents($entry);
     $json_data = json_decode($file_data, true);
+    $json_url = $domain . str_replace($html_path, '', $meta_dir) . basename($entry);
 
     $box_name = $json_data['name'];
     $box_description = truncate($json_data['description'], 25, '...');
     $box_provider = $json_data['versions'][0]['providers'][0]['name'];
 
-    array_push($response['boxes'], array('box' => basename(str_replace('.json', '', $entry)),
+    array_push($response['boxes'], array('json' => $json_url,
                                          'name' => $box_name,
                                          'description' => $box_description,
                                          'provider' => $box_provider));

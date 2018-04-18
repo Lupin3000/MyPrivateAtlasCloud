@@ -48,7 +48,7 @@ function json_box_info($domain)
                                             'created' => date("F d Y H:i:s", filemtime($box_path)),
                                             'version' => $item['version'],
                                             'provider' => $item['providers'][0]['name'],
-                                            'url' => $item['providers'][0]['url'],
+                                            'box' => $item['providers'][0]['url'],
                                             'checksum_type' => $item['providers'][0]['checksum_type'],
                                             'checksum' => $item['providers'][0]['checksum']));
   }
@@ -57,7 +57,7 @@ function json_box_info($domain)
 
   $response['name'] = $json_data['name'];
   $response['description'] = $json_data['description'];
-  $response['json_url'] = $json_url;
+  $response['json'] = $json_url;
   $response['latestversion'] = $latest_v;
 
   $response['status'] = true;

@@ -31,6 +31,7 @@ function update_json($box_path, $json_path)
   $box_url = $domain . str_replace($html_path, '', $box_dir) . $box_file;
   $file_data = file_get_contents($json_path);
   $json_data = json_decode($file_data, true);
+  $json_url = $domain . str_replace($html_path, '', $json_path);
 
   $json_data['description'] = transform_input($_POST['boxdescription']);
   $new_box_obj = array(
@@ -58,7 +59,7 @@ function update_json($box_path, $json_path)
       unlink($box_min_path);
       array_splice($json_data['versions'], $array_key, 1);
       array_push($response['deleted'], array('version' => $box_min_version,
-                                             'box' => basename(parse_url($box_min_url, PHP_URL_PATH))));
+                                             'box' => $box_min_url));
     }
   }
 
@@ -68,11 +69,11 @@ function update_json($box_path, $json_path)
 
   $response['status'] = true;
   $response['message'] = 'Your box is successful updated';
-  $response['name'] = transform_input($_POST['boxname']);
+  $response['name'] = str_replace('_', '/', transform_input($_POST['boxname']));
   $response['provider'] = transform_input($_POST['boxprovider']);
   $response['description'] = transform_input($_POST['boxdescription']);
-  $response['box'] = $box_file;
-  $response['json'] = basename($json_path);
+  $response['box'] = $box_url;
+  $response['json'] = $json_url;
 }
 
 function move_file($filename, $json_path)
