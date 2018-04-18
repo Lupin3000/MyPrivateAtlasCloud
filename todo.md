@@ -7,3 +7,4 @@
 ## Prio 2
 
 - modify DELETE/PUT headers for ajax
+- increase validation, verification and security

@@ -54,6 +54,7 @@ function return_logout()
     </nav>
     <div class="container">
       <h1>Discover the world of Vagrant boxes</h1>
+      <input type="text" class="searchBoxTable" placeholder="Search for names or providers...">
       <table id="boxTable">
         <thead>
           <tr>

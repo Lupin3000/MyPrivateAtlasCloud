@@ -101,6 +101,11 @@ code {
 .navigation .navigation-link.active {
   color: #606c76;
 }
+.searchBoxTable {
+  padding: 12px 20px 12px 40px !important;
+  width: 100%;
+  background: #fff url('../img/searchicon.png') no-repeat 8px 8px;
+}
 .modal, .info {
   display: none;
   position: fixed;
