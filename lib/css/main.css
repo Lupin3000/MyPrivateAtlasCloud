@@ -3,6 +3,13 @@
 a[class="button info_btn"] {
   margin-right: 5px;
 }
+td[colspan="4"] {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: -.08rem;
+  line-height: 1.35;
+}
 code {
   display: block;
   white-space: normal;
