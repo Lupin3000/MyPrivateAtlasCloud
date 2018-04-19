@@ -79,6 +79,7 @@ if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
 }
 
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET');
 header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($response);
 ?>
