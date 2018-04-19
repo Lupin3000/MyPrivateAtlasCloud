@@ -161,25 +161,11 @@ function return_logout()
       <p>
         <code>
           # add cloud box to repository<br>
-          $ vagrant box add demo/centos7 http://example.com/boxes/meta/centos7.json<br><br>
+          $ vagrant box add demo/box http://example.com/boxes/meta/demo_box.json<br><br>
           # list all boxes (optional)<br>
           $ vagrant box list<br><br>
           # create Vagrant project<br>
-          $ vagrant init demo/centos7
-        </code>
-      </p>
-      <h4>Use without cloud repository</h4>
-      <p>Attention: The versioning for boxes is not automaticaly given!</p>
-      <p>
-        <code>
-          # download box<br>
-          $ curl -C - -k -o ~/Downloads/centos.box http://example.com/boxes/bin/centos7.box<br><br>
-          # add local base box to repository<br>
-          $ vagrant box add --provider PROVIDER --box-version VERSION demo/centos7 ~/Downloads/centos7.box<br><br>
-          # list all boxes (optional)<br>
-          $ vagrant box list<br><br>
-          # create Vagrant project<br>
-          $ vagrant init demo/centos7
+          $ vagrant init demo/box
         </code>
       </p>
       <h4>Local Vagrant boxes</h4>
@@ -187,11 +173,11 @@ function return_logout()
         <code>
           # show local boxes<br>
           $ vagrant box list<br>
-          demo/centos7 (virtualbox, 1521038207)<br><br>
+          demo/box (virtualbox, 1521038207)<br><br>
           # use box for project<br>
-          $ vagrant init demo/centos7<br><br>
+          $ vagrant init demo/box<br><br>
           # delete box<br>
-          $ vagrant box remove demo/centos7
+          $ vagrant box remove demo/box
         </code>
       </p>
     </div>
