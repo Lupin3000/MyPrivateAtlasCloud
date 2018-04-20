@@ -157,27 +157,24 @@ function return_logout()
       <h2>Help</h2>
       <p>How can I use the Vagrant box locally? The answers you will now get from an example.</p>
       <img src="./img/help.jpg" alt="help image with example box">
-      <h4>Use cloud repository</h4>
+      <h4>Use MyPrivateVagrantCloud repository</h4>
       <p>
         <code>
-          # add cloud box to repository<br>
+          # add cloud box to local box repository<br>
           $ vagrant box add demo/box http://example.com/boxes/meta/demo_box.json<br><br>
-          # list all boxes (optional)<br>
-          $ vagrant box list<br><br>
-          # create Vagrant project<br>
-          $ vagrant init demo/box
+          # list all local boxes (optional)<br>
+          $ vagrant box list
         </code>
       </p>
-      <h4>Local Vagrant boxes</h4>
+      <h4>Local usage of Vagrant boxes</h4>
       <p>
         <code>
-          # show local boxes<br>
-          $ vagrant box list<br>
-          demo/box (virtualbox, 1521038207)<br><br>
-          # use box for project<br>
+          # create new Vagrant project<br>
           $ vagrant init demo/box<br><br>
-          # delete box<br>
-          $ vagrant box remove demo/box
+          # check for updates and download latest version<br>
+          $ vagrant box update<br><br>
+          # remove all outdated boxes<br>
+          $ vagrant box prune
         </code>
       </p>
     </div>
