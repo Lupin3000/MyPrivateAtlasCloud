@@ -1,85 +1,96 @@
 <?php
 session_start();
 
-$ini_array = parse_ini_file('../config/application.ini', true);
-$domain = $ini_array['server']['URL'];
-$html_path = $ini_array['repository']['html_path'];
-$meta_dir = $ini_array['repository']['json_dir'];
-$box_dir = $ini_array['repository']['box_dir'];
+$iniArray = parse_ini_file('../config/application.ini', true);
+$domain = $iniArray['server']['URL'];
+$htmlpath = $iniArray['repository']['html_path'];
+$metadir = $iniArray['repository']['json_dir'];
+$boxdir = $iniArray['repository']['box_dir'];
 $response = array();
 
-function transform_input($value='')
-{
-  $value = trim($value);
-  $value = htmlspecialchars($value);
-  return $value;
+/**
+ * transform input variables
+ *
+ * @param string $value
+ * @return string
+ */
+function transformInput($value = '') {
+	$value = trim($value);
+	$value = htmlspecialchars($value);
+	return $value;
 }
 
-function filesize_formatted($path)
-{
-  $size = filesize($path);
-  $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-  $power = $size > 0 ? floor(log($size, 1024)) : 0;
-  return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+/**
+ * format filesize by given path
+ *
+ * @param string $path
+ * @return string
+ */
+function filesizeFormatted($path) {
+	$size = filesize($path);
+	$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+	$power = $size > 0 ? floor(log($size, 1024)) : 0;
+	return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
 }
 
-function json_box_info($domain)
-{
-  global $response;
-  global $html_path;
-  global $meta_dir;
-  global $box_dir;
-  global $domain;
+/**
+ * create json
+ *
+ * @param string $domain
+ */
+function jsonBoxInfo($domain) {
+	global $response;
+	global $htmlpath;
+	global $metadir;
+	global $boxdir;
+	global $domain;
 
-  $json_file = str_replace('/', '_', transform_input($_GET['name'])) . '.json';
-  $json_path = $meta_dir . $json_file;
-  $file_data = file_get_contents($json_path);
-  $json_data = json_decode($file_data, true);
-  $json_url = $domain . str_replace($html_path, '', $meta_dir) . $json_file;
-  $all_versions = array();
-  $response['versions'] = array();
+	$jsonfile = str_replace('/', '_', transformInput($_GET['name'])) . '.json';
+	$jsonpath = $metadir . $jsonfile;
+	$filedata = file_get_contents($jsonpath);
+	$jsondata = json_decode($filedata, true);
+	$jsonurl = $domain . str_replace($htmlpath, '', $metadir) . $jsonfile;
+	$allversions = array();
+	$response['versions'] = array();
 
-  foreach ($json_data['versions'] as $item) {
-    $all_versions[] = $item['version'];
-    $box = basename(parse_url($item['providers'][0]['url'], PHP_URL_PATH));
-    $box_path = $box_dir . $box;
+	foreach ($jsondata['versions'] as $item) {
+		$allversions[] = $item['version'];
+		$box = basename(parse_url($item['providers'][0]['url'], PHP_URL_PATH));
+		$boxpath = $boxdir . $box;
 
-    array_push($response['versions'], array('size' => filesize_formatted($box_path),
-                                            'created' => date("F d Y H:i:s", filemtime($box_path)),
-                                            'version' => $item['version'],
-                                            'provider' => $item['providers'][0]['name'],
-                                            'box' => $item['providers'][0]['url'],
-                                            'checksum_type' => $item['providers'][0]['checksum_type'],
-                                            'checksum' => $item['providers'][0]['checksum']));
-  }
+		array_push($response['versions'], array('size' => filesizeFormatted($boxpath),
+																						'created' => date("F d Y H:i:s", filemtime($boxpath)),
+																						'version' => $item['version'],
+																						'provider' => $item['providers'][0]['name'],
+																						'box' => $item['providers'][0]['url'],
+																						'checksum_type' => $item['providers'][0]['checksum_type'],
+																						'checksum' => $item['providers'][0]['checksum']));
+	}
 
-  $latest_v = max($all_versions);
+	$latestv = max($allversions);
 
-  $response['name'] = $json_data['name'];
-  $response['description'] = $json_data['description'];
-  $response['json'] = $json_url;
-  $response['latestversion'] = $latest_v;
+	$response['name'] = $jsondata['name'];
+	$response['description'] = $jsondata['description'];
+	$response['json'] = $jsonurl;
+	$response['latestversion'] = $latestv;
 
-  $response['status'] = true;
-  $response['message'] = 'Box information';
+	$response['status'] = true;
+	$response['message'] = 'Box information';
 }
 
-if ((isset($_SESSION['valid'])) && (isset($_SESSION['user'])))
-{
-  if ((strcmp($_SERVER['REQUEST_METHOD'], 'GET') == 0) && (isset($_GET['name'])))
-  {
-    json_box_info($domain);
-  } else {
-    $response['status'] = false;
-    $response['message'] = 'Bad request';
-  }
+if ((isset($_SESSION['valid'])) && (isset($_SESSION['user']))) {
+	if ((strcmp($_SERVER['REQUEST_METHOD'], 'GET') === 0) && (isset($_GET['name']))) {
+		jsonBoxInfo($domain);
+	} else {
+		$response['status'] = false;
+		$response['message'] = 'Bad request';
+	}
 } else {
-  $response['status'] = false;
-  $response['message'] = 'Access to content prohibited';
+	$response['status'] = false;
+	$response['message'] = 'Access to content prohibited';
 }
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($response);
-?>

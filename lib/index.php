@@ -1,31 +1,31 @@
 <?php
 session_start();
 
-$ini_array = parse_ini_file('./config/application.ini', true);
-$security = $ini_array['login']['security'];
-$user = $ini_array['login']['user'];
-$password = $ini_array['login']['password'];
+$iniArray = parse_ini_file('./config/application.ini', true);
+$security = $iniArray['login']['security'];
+$user = $iniArray['login']['user'];
+$password = $iniArray['login']['password'];
 
 if (isset($_POST['login'])) {
-  if (empty($_POST['user']) || empty($_POST['passwd'])) {
-    $error = 'Invalid credentials';
-  } else {
-    if ($_POST['user'] == $user && $_POST['passwd'] == $password) {
-      $_SESSION['valid'] = true;
-      $_SESSION['timeout'] = time();
-      $_SESSION['user'] = $_POST['user'];
-      header('Location: ./atlas.php');
-    } else {
-      $error = 'Wrong credentials';
-    }
-  }
+	if (empty($_POST['user']) || empty($_POST['passwd'])) {
+		$error = 'Invalid credentials';
+	} else {
+		if ($_POST['user'] === $user && $_POST['passwd'] === $password) {
+			$_SESSION['valid'] = true;
+			$_SESSION['timeout'] = time();
+			$_SESSION['user'] = $_POST['user'];
+			header('Location: ./atlas.php');
+		} else {
+			$error = 'Wrong credentials';
+		}
+	}
 }
 
-if ($security == "off"){
-  $_SESSION['valid'] = true;
-  $_SESSION['timeout'] = time();
-  $_SESSION['user'] = 'anonymous';
-  header('Location: ./atlas.php');
+if ($security === "off") {
+	$_SESSION['valid'] = true;
+	$_SESSION['timeout'] = time();
+	$_SESSION['user'] = 'anonymous';
+	header('Location: ./atlas.php');
 }
 ?>
 <!doctype html>

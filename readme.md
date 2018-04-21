@@ -39,7 +39,7 @@ $ docker-compose down
 
 ## Configuration
 
-### Environment
+### Environment/Infrastructure configuration
 
 Please change these files before you run docker-compose up command!!!
 
@@ -47,7 +47,7 @@ Please change these files before you run docker-compose up command!!!
 - Nginx is configured via "_./src/default.conf_"
 - PHP is configured via "_./src/custom.ini_"
 
-### Application
+### Application configuration
 
 To edit application configuration, please use the "./lib/config/application.ini"!
 

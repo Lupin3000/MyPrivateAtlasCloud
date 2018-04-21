@@ -1,17 +1,20 @@
 <?php
 include './session.php';
 
-function return_logout()
-{
-  $ini_array = parse_ini_file('./config/application.ini', true);
-  $security = $ini_array['login']['security'];
+/**
+ * return logout menu item
+ *
+ * @return string
+ */
+function returnLogout() {
+	$iniArray = parse_ini_file('./config/application.ini', true);
+	$security = $iniArray['login']['security'];
 
-  if ($security == "on")
-  {
-    echo '<li class="navigation-item">';
-    echo '<a class="navigation-link" id="logout_btn" href="./logout.php" title="Logout from application">Logout</a>';
-    echo '</li>';
-  }
+	if ($security === "on") {
+		echo '<li class="navigation-item">';
+		echo '<a class="navigation-link" id="logout_btn" href="./logout.php" title="Logout from application">Logout</a>';
+		echo '</li>';
+	}
 }
 ?>
 <!doctype html>
@@ -48,7 +51,7 @@ function return_logout()
           <li class="navigation-item">
             <a class="navigation-link" id="help_btn" href="#" title="Show help page">Help</a>
           </li>
-          <?php return_logout(); ?>
+          <?php returnLogout(); ?>
         </ul>
       </section>
     </nav>
