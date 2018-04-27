@@ -1,0 +1,7 @@
+{
+  "require": {
+    "phpcheckstyle/phpcheckstyle": "dev-master",
+    "sebastian/phpcpd": "dev-master",
+    "phpmd/phpmd": "@stable"
+  }
+}
