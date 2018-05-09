@@ -1,8 +1,11 @@
 <?php
 session_start();
 
-$iniArray = parse_ini_file('../config/application.ini', true);
-$domain = $iniArray['server']['URL'];
+require_once 'code/class_readconfig.php';
+
+$configArrayObject = new LoadConfig('../config/application.ini');
+$iniArray = $configArrayObject->getConfigArray();
+$domain = $configArrayObject->getServerUrl();
 $htmlpath = $iniArray['repository']['html_path'];
 $metadir = $iniArray['repository']['json_dir'];
 $globpattern = $metadir . '*.json';
@@ -38,6 +41,8 @@ function truncate($string, $length = 100, $append = "...") {
 function jsonBoxList($domain, $metadir, $globpattern) {
 	global $response;
 	global $htmlpath;
+
+	$response['debug'] = $domain;
 
 	$response['status'] = true;
 	$response['message'] = 'List of current boxes';

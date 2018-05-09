@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-$iniArray = parse_ini_file('../config/application.ini', true);
+require_once 'code/class_readconfig.php';
+
+$configArrayObject = new LoadConfig('../config/application.ini');
+$iniArray = $configArrayObject->getConfigArray();
 $domain = $iniArray['server']['URL'];
 $versions = $iniArray['repository']['versions'];
 $htmlpath = $iniArray['repository']['html_path'];
